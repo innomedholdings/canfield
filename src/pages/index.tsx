@@ -63,15 +63,20 @@ export default function IndexPage({ data }: IIndexProps) {
                 borderRadius={{ md: "lg" }}
                 overflow="hidden"
               >
-                <GatsbyImage
-                  image={
-                    getImage(
-                      product?.frontmatter?.headerImage?.childrenImageSharp[0]
-                        ?.gatsbyImageData!
-                    ) as any
-                  }
-                  alt="Woman paying for a purchase"
-                />
+                {product.frontmatter.headerImage.childrenImageSharp.length ==
+                0 ? (
+                  ""
+                ) : (
+                  <GatsbyImage
+                    image={
+                      getImage(
+                        product?.frontmatter?.headerImage?.childrenImageSharp[0]
+                          ?.gatsbyImageData!
+                      ) as any
+                    }
+                    alt="Woman paying for a purchase"
+                  />
+                )}
               </Box>
               <Box>
                 <Text
@@ -126,5 +131,10 @@ export const query = graphql`
   }
 `;
 export const Head: HeadFC = () => {
-  return <title>Innomed|canfield</title>;
+  return (
+    <>
+      <meta name="charset" content="EUC-KR"></meta>
+      <title>Innomed|canfield</title>
+    </>
+  );
 };
