@@ -44,57 +44,64 @@ export default function IndexPage({ data }: IIndexProps) {
             <Box></Box>
           </Grid>
         </Box>
-        {data.allMdx?.nodes?.map((product, idx) => (
-          <Stack
-            p={{ md: 3 }}
-            key={idx}
-            display={{ md: "flex" }}
-            direction={{ md: "row" }}
-          >
-            <Box
-              flexShrink={0}
-              width={{ md: 80 }}
-              borderRadius={{ md: "lg" }}
-              overflow="hidden"
+        <Box
+          px={{
+            base: 1,
+            lg: 0.5,
+          }}
+        >
+          {data.allMdx?.nodes?.map((product, idx) => (
+            <Stack
+              key={idx}
+              m={{ base: 0.5, md: 1 }}
+              display={{ md: "flex" }}
+              direction={{ md: "row" }}
             >
-              <GatsbyImage
-                image={
-                  getImage(
-                    product.frontmatter?.headerImage?.childrenImageSharp[0]
-                      ?.gatsbyImageData!
-                  ) as any
-                }
-                alt="Woman paying for a purchase"
-              />
-            </Box>
-            <Box mt={{ base: 4, md: 0 }} ml={{ md: 6 }}>
-              <Text
-                fontWeight="bold"
-                textTransform="uppercase"
-                fontSize="xl"
-                letterSpacing="wide"
-                color="teal.600"
+              <Box
+                flexShrink={0}
+                width={{ md: 80 }}
+                borderRadius={{ md: "lg" }}
+                overflow="hidden"
               >
-                {product.frontmatter?.name}
-              </Text>
-
-              <Link to={`/products/${product.id}`}>
+                <GatsbyImage
+                  image={
+                    getImage(
+                      product?.frontmatter?.headerImage?.childrenImageSharp[0]
+                        ?.gatsbyImageData!
+                    ) as any
+                  }
+                  alt="Woman paying for a purchase"
+                />
+              </Box>
+              <Box>
                 <Text
-                  mt={1}
-                  display="block"
-                  fontSize="lg"
-                  lineHeight="normal"
-                  fontWeight="semibold"
+                  fontWeight="bold"
+                  textTransform="uppercase"
+                  fontSize="xl"
+                  letterSpacing="wide"
+                  color="teal.600"
                 >
-                  More Detail &rarr;
+                  {product.frontmatter?.name}
                 </Text>
-              </Link>
-              <Text mt={2} color="gray.500">
-                {product.frontmatter?.summary}
-              </Text>
-            </Box>
-          </Stack>
-        ))}
+
+                <Link to={`/products/${product.id}`}>
+                  <Text
+                    mt={1}
+                    display="block"
+                    fontSize="lg"
+                    lineHeight="normal"
+                    fontWeight="semibold"
+                  >
+                    More Detail &rarr;
+                  </Text>
+                </Link>
+                <Text mt={2} color="gray.500">
+                  {product.frontmatter?.summary}
+                </Text>
+              </Box>
+            </Stack>
+          ))}
+        </Box>
       </VStack>
     </Layout>
   );

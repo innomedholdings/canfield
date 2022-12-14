@@ -1,57 +1,16 @@
-import {
-  Box,
-  HStack,
-  Image,
-  Menu,
-  MenuButton,
-  MenuItem,
-  MenuList,
-  Text,
-  VStack,
-} from "@chakra-ui/react";
-import { graphql, Link, navigate, useStaticQuery } from "gatsby";
+import { Box, HStack, Text, VStack } from "@chakra-ui/react";
+
 import React from "react";
-import { FiMail, FiMenu } from "react-icons/fi";
+import { FiMail } from "react-icons/fi";
+import Header from "./Header";
 
 export default function Layout({ children }: any) {
-  const data = useStaticQuery<Queries.MenuDataQuery>(graphql`
-    query MenuData {
-      allMdx {
-        nodes {
-          frontmatter {
-            name
-          }
-          id
-        }
-      }
-    }
-  `);
   return (
     <Box>
-      <HStack bgColor={"gray.800"} justifyContent={"space-between"}>
-        <Box p={4} color={"red.400"}>
-          <Link to="/">
-            <Image src="https://www.canfieldsci.com/common/images/graphics/logo-canfield-site.png" />
-          </Link>
-        </Box>
-        <Menu>
-          <MenuButton px={10} fontSize={"4xl"}>
-            <FiMenu color="white" />
-          </MenuButton>
-          <MenuList>
-            {data?.allMdx.nodes.map((product) => (
-              <MenuItem
-                key={product?.id}
-                onClick={() => navigate(`/products/${product?.id}`)}
-              >
-                {product.frontmatter?.name}
-              </MenuItem>
-            ))}
-          </MenuList>
-        </Menu>
-      </HStack>
+      <Header />
       <Box>{children}</Box>
       <VStack
+        mt={3}
         p={3}
         minH={20}
         bgColor={"gray.900"}
